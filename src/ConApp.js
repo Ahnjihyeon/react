@@ -3,7 +3,7 @@ import React, { createContext, useContext } from 'react'
 //0.AppContext 생성
 const AppContext = createContext()
 
-const App = () => {
+const ConApp = () => {
     const user = {
         nickname:'bomba',
         isAdmin:true
@@ -24,7 +24,9 @@ const PostsContext = createContext()
 const Posts = () => {
     const posts = [
         {title : 'escaped from the zoo',
-         content : 'bomba escaped from the zoo'}
+         content : 'bomba escaped from the zoo'},
+        {title: 'english',
+         content: 'happy english timem'}
     ]
     
     return (
@@ -39,22 +41,26 @@ const Children = () => {
     const user = useContext(AppContext)
     const posts = useContext(PostsContext)
     
-    let label = 'user'
-    if (user.isAdmin){
+    let label = 'user' // label 기본값 user
+    if (user.isAdmin){ //user가 Admin이면
         label = 'admin'
     }
 
     return(
         <div>
-            <div>{label}</div>
-            <div>{user.nickname}</div>
+            <div>권한 : {label}</div>
+            <div>닉네임 : {user.nickname}</div>
+            <div>----------------------------------</div>
             <div>{posts.map((post, index) => (
                 <div key={index}>
-                    <div>{post.title}</div>
-                    <div>{post.content}</div>
+                    <div>No : {index+1}</div>
+                    <div>제목 : {post.title}</div>
+                    <div>내용 : {post.content}</div>
                 </div>
             ))}
             </div>
         </div>
     )
 }
+
+export default ConApp;
